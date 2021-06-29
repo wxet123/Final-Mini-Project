@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@2,100&display=swap');
+
+body {
+  background-color: whitesmoke;
+  font-family: 'Roboto', sans-serif;
+}
+
+.bg-fujitsu {
+  background-color: #f50024;
+}
+
+nav {
+  background-color: #f50024;
+}
+
+.navbar-brand {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.row {
+  /* margin-top: 20px; */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 90px;
+  padding-right: 90px;
+}
+
+/* .card {
+  width: 450px;
+  height: 520px;
+}
+
+.img-dashboard {
+  width: 350px;
+  height: 420px;
+} */
+
+.card {
+  width: 450px;
+  height: 299px;
+}
+
+.img-dashboard {
+  width: 250px;
+  height: 250px;
+  padding-left: 70px;
+}
+
+.dashboard-item {
+  	padding-top: 100px;
+    margin-top: 100px;
+    padding-bottom: 100px;
+}
+.btn {
+  width: 150px;
+  height: 49px;
+  border: none;
+  outline: none;
+  border-radius: 49px;
+  cursor: pointer;
+  background-color: #FF616D;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  color: #000;
+}
+
+.dropdown-item:hover {
+  background-color: #E99497;
+  transition: all ease 0.5s;
+}
+
+.dropdown-menu a.dropdown-item:hover {
+  color: #fff;
+  transition: all ease-in-out 0.5s;
+}
+
+/* ADD TRAINING MODAL */
+
+label {
+  font-family: 'Roboto', sans-serif;
+}
+.modal-header {
+  background-color: #D83A56;
+  color: #fff;
+  font-style: initial;
+  font-family: 'Roboto', sans-serif;
+}
+
+.btn-close {
+  background-color: #fff;
+  transition: all ease-in-out 0.5s;
+  margin: 50px;
+}
+
+.form-control {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+}
+
+.modal {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 70px;
+}
+/* ADD TRAINING MODAL */
+
+/* BADGE */
+
+.badge {
+  background-color: #f50024;
+}
+
+.row-striped:nth-of-type(odd) {
+  background-color: #efefef;
+  border-left: 4px #000000 solid;
+}
+
+.row-striped:nth-of-type(even) {
+  background-color: #ffffff;
+  border-left: 4px #efefef solid;
+}
+
+.row-striped {
+  padding: 15px 0;
+}
+
+.container-sched {
+  margin-top: 100px;
+}
+
+/* BADGE */

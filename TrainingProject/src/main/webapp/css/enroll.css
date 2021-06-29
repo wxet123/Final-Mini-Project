@@ -1,0 +1,90 @@
+@charset "ISO-8859-1";
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@2,100&display=swap');
+
+body {
+  background-color: whitesmoke;
+  font-family: 'Roboto', sans-serif;
+}
+
+.bg-fujitsu {
+  background-color: #f50024;
+}
+
+nav {
+  background-color: #f50024;
+}
+
+.navbar-brand {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.navbar {
+  position: block;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.dropdown-item:hover {
+  background-color: #E99497;
+  transition: all ease 0.5s;
+}
+
+.dropdown-menu a.dropdown-item:hover {
+  color: #fff;
+  transition: all ease-in-out 0.5s;
+}
+
+
+div.card.px-md-3.py-md-3{
+    border: none;
+    box-shadow: none;
+    background: whitesmoke;
+}  
+
+
+.enroll-btn{
+	height: 50px;
+	width: 120px;
+	border: 2px solid #4AA96C;
+	cursor:pointer;
+	text-align:center;
+	border-radius: 24px;
+	transition: 0.3s;
+	outline: #9FE6A0;
+	color: #4AA96C;
+	background: whitesmoke;
+	box-sizing: border-box;
+	
+}
+.enroll-btn:after{
+	content: "Enroll now";
+	  display: flex;
+  justify-content: center;
+  position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+
+.enroll-btn:hover{
+	background: #4AA96C;
+	border:none;
+	color: #fff;
+}
+
+
+.wrapper{
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+

@@ -86,13 +86,7 @@
 
 
 	<%
-	response.setIntHeader("Refresh", 30);
-    Calendar calendar = new GregorianCalendar();
-    
-    int hour = calendar.get(Calendar.HOUR);
-    int minute = calendar.get(Calendar.MINUTE);
-    int second = calendar.get(Calendar.SECOND);
-    
+
 	response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
 
 	if (session.getAttribute("username") == null) {

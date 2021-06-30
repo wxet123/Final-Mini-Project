@@ -29,10 +29,87 @@ public class ListOfTrainingDAO {
 		return con;
 	}
 	
+	public static List<ListOfTrainings> getDoneCoursesPerInstructor(String username) throws ParseException {
+
+		List<ListOfTrainings> listAll = new ArrayList<ListOfTrainings>();
+
+		String query = "select * from createtraining where status = 2 and username = ?;";
+		
+		
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+
+				
+
+					Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("date"));
+
+					int dateNumber = (date1.getDate());
+					String dayName = (dayName(date1.getDay()));
+					String month = month(date1.getMonth());
+					String course_id = (rs.getString("course_id"));
+					String course_title = (rs.getString("course_title"));
+					String description = (rs.getString("description"));
+					String date = (rs.getString("date"));
+					String startTime = (time((rs.getString("startTime"))));
+					String endTime = (time(rs.getString("endTime")));
+					String instructor = (rs.getString("instructor"));
+					int training_id = (rs.getInt("training_id"));
+					int status = rs.getInt("status");
+
+					listAll.add(new ListOfTrainings(course_id, course_title, status, date, dateNumber, dayName,
+							startTime, endTime, instructor, description, training_id, month));
+				
+				}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return listAll;
+	}
 	
 	public static List<EnrolledStudents> getStudentsEnrolled(String username, int training_id) {
 		
 		String query = "SELECT adt.enrollment_id, adt.training_id, ct.instructor, ct.date, ct.startTime, ct.endTime, e.employee_id , e.first_name, e.last_name from addemptraining adt join createtraining ct on adt.training_id = ct.training_id join employee e on adt.employee_id = e.employee_id where ct.status = 1;";
+		
+	
+		
+		List<EnrolledStudents> student = new ArrayList<EnrolledStudents>();
+
+		
+		
+		try (Connection connection = getConnection();
+				PreparedStatement ps = connection.prepareStatement(query)) {
+				ResultSet rs = ps.executeQuery();
+						
+				while(rs.next()) {
+					if(rs.getInt("training_id") == training_id) {
+					String fullname = rs.getString("last_name") + ", " +rs.getString("first_name");
+					
+						student.add(new EnrolledStudents(fullname));
+					
+					}
+				}
+	
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		
+		
+		return student;
+		
+	}
+	
+	
+public static List<EnrolledStudents> getDoneStudents(String username, int training_id) {
+		
+		String query = "SELECT adt.enrollment_id, adt.training_id, ct.instructor, ct.date, ct.startTime, ct.endTime, e.employee_id , e.first_name, e.last_name from addemptraining adt join createtraining ct on adt.training_id = ct.training_id join employee e on adt.employee_id = e.employee_id where ct.status = 2;";
 		
 	
 		
@@ -107,7 +184,7 @@ public class ListOfTrainingDAO {
 
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from createtraining");
+			PreparedStatement ps = con.prepareStatement("select * from createtraining where status = 1");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -146,7 +223,7 @@ public class ListOfTrainingDAO {
 	List<ListOfTrainings> listAll=new ArrayList<ListOfTrainings>();  
     
 	
-	String query = "select * from createtraining where instructor = ?";
+	String query = "select * from createtraining where instructor = ? ";
 	
     try{  
         Connection con=getConnection();  

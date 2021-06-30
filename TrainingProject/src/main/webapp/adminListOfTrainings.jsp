@@ -87,8 +87,8 @@
 				<h1 class="mb-4 px-md-3 text-center">List of Trainings</h1>
 				<div class="card px-md-3 py-md-3" style = "  margin: auto; width:1200px; left: -250px;">
 					<div class="card-body">
-						<span class="d-block p-2 bg-fujitsu text-white">List of
-							training meetings created</span>
+						<h4><span class="d-block p-2 bg-fujitsu text-white">List of
+							training meetings created</span></h4>
 
 
 
@@ -104,7 +104,7 @@
 						
 						
 						ListOfTrainingDAO ldao = new ListOfTrainingDAO();
-
+						
 
 						%>
 
@@ -123,10 +123,10 @@
 							<c:forEach items="${listAll}" var="u" varStatus = "loop">
 								<tbody>
 									<tr class="active-row">
-										<td>${u.getCourse_id()}</td>
-										<td>${u.getCourse_title()}</td>
-										<td>${u.getDate()}</td>
-										<td>
+										<td class = "row-content">${u.getCourse_id()}</td>
+										<td class = "row-content">${u.getCourse_title()}</td>
+										<td class = "row-content">${u.getDayName()} ${u.getMonth()} ${u.getDateNumber()}, ${u.getDate()} </td>
+										<td class = "row-content">
 									
 										
 										<c:set var= "tID" value = "${u.getTraining_id()}" />
@@ -138,6 +138,9 @@
 									
 									List<EnrolledStudents> students = ListOfTrainingDAO.getStudentsEnrolled(userID, tID);
 									request.setAttribute("students", students);
+									
+									
+									
 									
 									%>
 
@@ -223,11 +226,143 @@
 						<c:if test="${empty listAll}">
 							<div class="noDATA">
 								<br> <br>
-								<h3 class="errorTitle">NO DATA FOUND</h3>
+								<h3 class="errorTitle"> No training schedule created. <a href="adminDashboard.jsp">Click to create training. </a></h3>
 
 							</div>
 						</c:if>
 					</div>
+					
+					
+					<!--   DONE COURSES AREA    -->
+					<br>
+					<br>
+					<br>
+					
+					
+					<div class="card-body">
+						<h4><span class="d-block p-2 bg-fujitsu text-white" style = "background-color : #346751">List of
+							finished trainings</span></h4>
+
+
+
+						<c:set var= "userID" value = "${username}" />
+						
+						<%
+						
+
+						List<ListOfTrainings> listDone = ListOfTrainingDAO.getDoneCoursesPerInstructor(userID);
+						request.setAttribute("listDone", listDone);
+
+
+
+						%>
+
+						<br>
+						<table class="styled-table" >
+							<thead>
+								<tr>
+									<th class="th" style = "background-color : #346751">COURSE ID</th>
+									<th class="th" style = "background-color : #346751">COURSE</th>
+									<th class="th" style = "background-color : #346751">DATE</th>
+									<th class="th" style = "background-color : #346751">Enrolled Students</th>
+									<th class="th" style = "background-color : #346751">ACTION</th>
+								</tr>
+							</thead>
+
+
+
+							<c:forEach items="${listDone}" var="done" varStatus = "loop">
+								
+								<tbody>
+									<tr class="active-row">
+										<td class = "row-content">${done.getCourse_id()}</td>
+										<td class = "row-content">${done.getCourse_title()}</td>
+										<td class = "row-content">${done.getDate()}</td>
+										<td class = "row-content">
+									
+										
+										
+										<c:set var= "tId" value = "${done.getTraining_id()}" />
+						
+									<%
+										
+									int tId = Integer.valueOf(""+pageContext.getAttribute("tId"));
+									
+									
+									List<EnrolledStudents> studentsDone = ListOfTrainingDAO.getDoneStudents(userID, tId);
+									request.setAttribute("studentsDone", studentsDone);
+									
+									
+									
+									
+									%>
+
+										
+						
+											<select class="form-select" multiple aria-label="multiple select example">
+ 									
+  													
+												<c:forEach items="${studentsDone}" var="sd" varStatus = "studentsCount">
+												
+  													<option value="<c:out   value="${studentsCount}" />">  ${sd.getFullName()}</option>
+  													
+  												</c:forEach>
+  													
+  												<c:if test="${empty studentsDone}">
+														
+														<option >No Students enrolled</option>			
+												
+												</c:if>
+  												
+											</select>
+										</td>
+										
+								
+								
+
+										<td>
+										<form action="remove" method = "post" id="deleteForm">
+										
+											 <input type="hidden" name="training_id" value="<c:out value="${done.getTraining_id()}"/>">
+											 
+									<!-- 		 <input type="hidden" name="courseName" value="<c:out value="${u.getCourse_title()}"/>">  -->
+											<div class = "table-btns">
+												<button id="btn-remove"
+												
+													style="	outline: none;
+													background: none;
+													border: none;
+													color: #f50024;
+													height: 5rem;
+													width: 4rem;
+													transition: 0.15s;"
+													
+												onclick = "remove()">
+												<i 
+													onMouseover= "this.style.color='#ff4c88'"
+													onMouseout= "this.style.color='#f50024'"
+												 class="icon fa fa-minus-circle fa-2x"></i>
+												</button>
+											</div>
+										</form>
+											
+										</td>
+										
+									</tr>
+							</c:forEach>
+
+							</tbody>
+						</table>
+
+						<c:if test="${empty listDone}">
+							<div class="noDATA">
+								<br> <br>
+								<h3 class="errorTitle"> No record</h3>
+
+							</div>
+						</c:if>
+					</div>
+					
 				</div>
 			</div>
 		</div>

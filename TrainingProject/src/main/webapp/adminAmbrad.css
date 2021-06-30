@@ -97,6 +97,7 @@ span {
 .styled-table th, .styled-table td {
 	padding: 12px 15px;
 	padding-left: 45px;
+	font-size: 1.2em;
 }
 
 .styled-table tbody tr {

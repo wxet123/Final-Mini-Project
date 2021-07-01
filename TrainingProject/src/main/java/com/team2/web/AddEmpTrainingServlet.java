@@ -55,7 +55,7 @@ public class AddEmpTrainingServlet extends HttpServlet {
 			else {
 				
 				AddEmpTrainingDAO.addTraining(add);
-				response.sendRedirect("added.jsp");
+				response.sendRedirect("enroll.jsp");
 			}
 			
 		}

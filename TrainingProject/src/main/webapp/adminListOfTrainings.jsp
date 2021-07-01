@@ -31,6 +31,7 @@
 
 
 	<%
+	 response.setIntHeader("Refresh", 3);
 	response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
 
 	if (session.getAttribute("username") == null) {
@@ -157,8 +158,8 @@
   													
   												<c:if test="${empty students}">
 														
-														<option >No enrollments yet</option>			
-												
+															<option disabled> No enrollments made</option>
+  													
 												</c:if>
   												
 											</select>
@@ -310,7 +311,7 @@
   													
   												<c:if test="${empty studentsDone}">
 														
-														<option >No Students enrolled</option>			
+														<p>No enrollments made</p>			
 												
 												</c:if>
   												

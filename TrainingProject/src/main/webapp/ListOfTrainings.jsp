@@ -25,6 +25,7 @@
 
 
 	<%
+	 response.setIntHeader("Refresh", 3);
 	response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
 
 	if (session.getAttribute("username") == null) {
